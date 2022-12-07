@@ -1,0 +1,59 @@
+#include <stdio.h> 
+#include <stdlib.h> 
+Typedef struct Node { 
+ Int number; 
+ Struct Node* next; 
+} Node; 
+Void Push(Node** head, int A) 
+{ 
+ Node* n = malloc(sizeof(Node)); 
+ n->number = A; 
+ n->next = *head; 
+ *head = n; 
+} 
+Void deleteN(Node** head, int position) 
+{ 
+ Node* temp; 
+ Node* prev; 
+ Temp = *head; 
+ Prev = *head; 
+ For (int I = 0; I < position; i++) { 
+ If (I == 0 && position == 1) { 
+ *head = (*head)->next; 
+ Free(temp); 
+ } 
+ Else {
+If (I == position – 1 && temp) { 
+ Prev->next = temp->next; 
+ Free(temp); 
+ } 
+ Else { 
+ Prev = temp;
+ If (prev == NULL) 
+ Break; 
+ Temp = temp->next; 
+ } 
+ } 
+ } 
+} 
+Void printList(Node* head) 
+{ 
+ While (head) { 
+Printf(“[%i] [%p]->%p\n”, head->number, head, 
+ Head->next); 
+ Head = head->next;
+ } 
+ Printf(“\n\n”); 
+} 
+int main()
+{ 
+ Node* list = malloc(sizeof(Node)); 
+ List->next = NULL; 
+ Push(&list, 1); 
+ Push(&list, 2); 
+ Push(&list, 3);
+printList (list);
+ deleteN(&list, 1); 
+ printList(list); 
+ return 0;
+}
