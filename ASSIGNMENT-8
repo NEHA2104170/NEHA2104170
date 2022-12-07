@@ -1,0 +1,95 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define V 10
+int main() {
+ Struct stack {
+ int adj[V];
+ int top;
+ }; 
+ Struct node {
+ int d;
+ Struct node * next;
+ }; 
+ Struct Graph {
+ Struct node * vertices[V]; 
+ int vis[V];
+ };
+ Struct edge {
+ int s;
+ int d;
+ };
+ Struct stack * createstack() {
+ Struct stack* Q = malloc(sizeof(struct stack));
+ Q->top = -1;
+ return Q;
+ }
+ 
+ Struct stack * push(struct stack * q, int toVisit){
+ Struct stack * Q = q;
+ Q->top++;
+ Q->adj[Q->top] = toVisit;
+return Q;
+ }
+ 
+ Int pop(struct stack * q){
+ Struct stack * Q = q;
+ Int removed = Q->adj[Q->top];
+ Q->top--;
+ return removed;
+ }
+ 
+ Void printstack(struct stack * q){
+ Struct stack * Q = q;
+ For(int I = 0 ; I < Q->top; i++){
+ Printf(“%d,”,Q->adj[i]);
+ }
+ Printf(“\n”);
+ }
+ 
+ Struct Graph * e2g(struct edge edges[], int e){
+ Struct Graph * graph = (struct Graph *)malloc(sizeof(struct Graph));
+ For (int I = 0; I < V; i++){
+ Graph->vertices[i] = NULL; 
+ }
+ for (int I = 0; I < e; i++){ //loop to add the edges to the graph
+ int src = edges[i].s;
+ int dest = edges[i].d;
+ 
+ Struct node * newNode = (struct node *)malloc(sizeof(struct node));
+newNode->d = dest;
+newNode->next = graph->vertices[src]; 
+ graph->vertices[src] = newNode; 
+ }
+ return graph;
+ }
+ Void dfs(struct Graph * gr, int start){
+ for (int I = 0; I < V; i++){
+ Gr->vis[i] = 0;
+ }
+ Printf(“>>DFS Traversal<<\n”);
+ Struct Graph * graph = gr;
+ Struct stack * q = createstack();
+ Q = push(q, start); 
+ Graph->vis[start] = 1;
+ While (q->top > -1){ //while loop until the stack is empty
+ 
+ int visit = pop(q); 
+ Printf(“%d->”, visit); 
+ Struct node * temp = graph->vertices[visit]; 
+ While (temp){
+ If (graph->vis[temp->d] == 0){
+ Q = push(q, temp->d);
+ Graph->vis[temp->d] = 1;
+ }
+ Temp = temp->next;
+ } 
+ }
+ Printf(“END\n”);
+}
+Struct edge edges [] = {{1,2}, {1,3}, {2,3}, {2,4}, {3,4}, {4,5}};
+
+ int num = sizeof(edges)/sizeof(edges[0]); 
+ Struct Graph * g = e2g(edges, num);
+ dfs(g,1); 
+ return 0;
+}
